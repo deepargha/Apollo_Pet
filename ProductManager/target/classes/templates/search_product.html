@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Product Search</title>
+</head>
+<body>
+<div>
+<form action="#" th:action="@{/search}" th:object="${product}"
+			method="post">
+
+			<table border="0" cellpadding="10">
+			<tr>
+				<td>Medicine Name: </td>
+				<td><input type="text" th:field="*{medicinename}" /></td>
+			</tr>
+			<tr>
+					<td colspan="2"><button type="submit">search</button> </td>
+				</tr>
+			</table>
+		</form>
+		
+</div>
+<div>
+<table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>MedicineName</th>
+                <th>Distributor</th>
+                <th>Made In</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Entry date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr th:each="product : ${listProducts}">
+            	<td th:text="${product.id}">Product ID</td>
+                <td th:text="${product.medicinename}">MedicineName</td>
+                <td th:text="${product.distributor}">distributor</td>
+                <td th:text="${product.madein}">Made in</td>
+                <td th:text="${product.price}">Price</td>
+                <td th:text="${product.discount}">Discount</td>
+                <td th:text="${#dates.format(product.date,'dd-MM-yyyy')}">Entry date</td>
+                <td>
+                	<a th:href="@{'/edit/' + ${product.id}}">Edit</a>
+                	&nbsp;&nbsp;&nbsp;
+                	<a th:href="@{'/delete/' + ${product.id}}">Delete</a>
+                </td>
+            </tr>
+           
+        </tbody>
+    </table>
+</div>
+</body>
